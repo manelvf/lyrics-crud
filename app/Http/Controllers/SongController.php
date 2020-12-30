@@ -55,10 +55,10 @@ class SongController extends Controller
         $this->validate($request, [
             'title'  => 'required',
             'lyrics' => 'required',
-            'artist' => 'required|exists:artists,id',
+	    'artist_id' => 'required|exists:artists,id',
         ]);
 
-        $artist = Artist::find($request->artist);
+        $artist = Artist::find($request->artist_id);
         $song   = new Song($request->all());
         
         $artist->songs()->save($song);
