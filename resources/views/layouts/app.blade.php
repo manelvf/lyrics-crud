@@ -36,7 +36,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
               </button>
-              <a class="navbar-brand" href="#">Coolyrics</a>
+              <a class="navbar-brand" href="#">{{ config('app.name', 'Coolyrics') }}</a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->

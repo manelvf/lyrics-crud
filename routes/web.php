@@ -13,7 +13,11 @@
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index');
+Route::get('/', 'HomeController@index');
 
 Route::resource('artists', 'ArtistController');
 Route::resource('songs',   'SongController');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
