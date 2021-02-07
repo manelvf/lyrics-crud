@@ -10,6 +10,11 @@
                     <form class="form-horizontal" role="form" method="POST" action="{{ route('register') }}">
                         {{ csrf_field() }}
 
+			<input type="hidden" name="recaptcha_token" id="recaptcha_token">
+@if($errors->has("recaptcha_token"))
+    {{$errors->first("recaptcha_token")}}
+@endif
+
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                             <label for="name" class="col-md-4 control-label">Name</label>
 
@@ -67,10 +72,21 @@
                                 </button>
                             </div>
                         </div>
+
+
                     </form>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+<script src="https://www.google.com/recaptcha/api.js?render={{ env('GOOGLE_CAPTCHA_PUBLIC_KEY') }}"></script>
+<script>
+grecaptcha.ready(function() {
+  grecaptcha.execute('{{ env('GOOGLE_CAPTCHA_PUBLIC_KEY') }}')    .then(function(token) {
+   document.getElementById("recaptcha_token").value = token;
+ }); });
+</script>
+
 @endsection
