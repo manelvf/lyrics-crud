@@ -6,6 +6,18 @@
  */
 
 require('./bootstrap');
+window.Vue = require("vue").default;
+const bootstrapVue = require('bootstrap-vue');
+const BootstrapVue = bootstrapVue.BootstrapVue;
+const IconsPlugin = bootstrapVue.IconsPlugin;
+
+//import 'bootstrap/dist/css/bootstrap.css'
+//import 'bootstrap-vue/dist/bootstrap-vue.css'
+
+import './app.scss'
+
+Vue.use(BootstrapVue);
+Vue.use(IconsPlugin);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -18,3 +30,4 @@ Vue.component('example', require('./components/Example.vue'));
 const app = new Vue({
     el: '#app'
 });
+

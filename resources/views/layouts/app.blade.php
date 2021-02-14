@@ -26,9 +26,8 @@
 <body>
     <div id="app">
        
-        <nav class="navbar navbar-inverse">
+        <!--b-navbar class="navbar navbar-inverse">
           <div class="container-fluid">
-            <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
               <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
                 <span class="sr-only">Toggle navigation</span>
@@ -39,7 +38,6 @@
               <a class="navbar-brand" href="#">{{ config('app.name', 'Coolyrics') }}</a>
             </div>
 
-            <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
               <ul class="nav navbar-nav">
                 
@@ -73,9 +71,53 @@
                 </li>
               </ul>
               
-            </div><!-- /.navbar-collapse -->
-          </div><!-- /.container-fluid -->
-        </nav>
+            </div>
+          </div>
+        </b-navbar-->
+
+  <b-navbar toggleable="lg" type="dark" variant="info">
+    <b-navbar-brand href="#">{{ config('app.name', 'Coolyrics') }}</b-navbar-brand>
+
+    <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
+
+    <b-collapse id="nav-collapse" is-nav>
+      <b-navbar-nav>
+        <b-nav-item href="#">Link</b-nav-item>
+        <b-nav-item-dropdown text="Songs" right>
+          <b-dropdown-item href="{{ route('songs.create') }}">New Song</b-dropdown-item>
+          <b-dropdown-item href="{{ route('songs.index') }}">Songs</b-dropdown-item>
+        </b-nav-item-dropdown>
+        <b-nav-item-dropdown text="Artists" right>
+          <b-dropdown-item href="{{ route('artists.create') }}">New Artist</b-dropdown-item>
+          <b-dropdown-item href="{{ route('artists.index') }}">Artists</b-dropdown-item>
+        </b-nav-item-dropdown>
+        <b-nav-item href="{{route('register')}}#">Register New User</b-nav-item>
+      </b-navbar-nav>
+
+      <!-- Right aligned nav items -->
+      <b-navbar-nav class="ml-auto">
+        <b-nav-form>
+          <b-form-input size="sm" class="mr-sm-2" placeholder="Search"></b-form-input>
+          <b-button size="sm" class="my-2 my-sm-0" type="submit">Search</b-button>
+        </b-nav-form>
+
+        <b-nav-item-dropdown text="Lang" right>
+          <b-dropdown-item href="#">EN</b-dropdown-item>
+          <b-dropdown-item href="#">GL</b-dropdown-item>
+        </b-nav-item-dropdown>
+
+        <b-nav-item-dropdown right>
+          <!-- Using 'button-content' slot -->
+          <template #button-content>
+            <em>User</em>
+          </template>
+          <b-dropdown-item href="#">Profile</b-dropdown-item>
+          <b-dropdown-item href="{{route('logout')}}">Logout</b-dropdown-item>
+        </b-nav-item-dropdown>
+      </b-navbar-nav>
+    </b-collapse>
+  </b-navbar>
+
 
         @if (Session::has('flash_message'))
           <div class="container">
@@ -93,5 +135,19 @@
 
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <script src="{{ asset('js/app.js') }}"></script>
+
+<script src="https://www.google.com/recaptcha/api.js?render={{ env('GOOGLE_CAPTCHA_PUBLIC_KEY') }}"></script>
+<script>
+grecaptcha.ready(function() {
+	grecaptcha.execute('{{ env('GOOGLE_CAPTCHA_PUBLIC_KEY') }}')
+	    	.then(function(token) {
+			let recaptcha_token = document.getElementById("recaptcha_token");
+
+			if (token && recaptcha_token) {
+   document.getElementById("recaptcha_token").value = token;
+			}
+ }); });
+</script>
+
 </body>
 </html>

@@ -81,12 +81,4 @@
     </div>
 </div>
 
-<script src="https://www.google.com/recaptcha/api.js?render={{ env('GOOGLE_CAPTCHA_PUBLIC_KEY') }}"></script>
-<script>
-grecaptcha.ready(function() {
-  grecaptcha.execute('{{ env('GOOGLE_CAPTCHA_PUBLIC_KEY') }}')    .then(function(token) {
-   document.getElementById("recaptcha_token").value = token;
- }); });
-</script>
-
 @endsection
