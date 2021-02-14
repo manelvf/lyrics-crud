@@ -106,10 +106,10 @@ class SongController extends Controller
         
             'title'     => 'required',
             'lyrics'    => 'required',
-            'artist'    => 'required|exists:artists,id',
+	    'artist_id' => 'required|exists:artists,id',
         ]);
 
-        $artist = Artist::find($request->artist);
+        $artist = Artist::find($request->artist_id);
         $song   = Song::find($id);
 
         $song->update($request->all());
